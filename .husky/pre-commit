@@ -1,0 +1,16 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Menjalankan Prettier untuk memformat file..."
+npx prettier --write .
+echo "Prettier selesai, kode sudah diformat."
+
+echo "Menjalankan Lint untuk file..."
+npm run lint
+echo "Linting selesai, tidak ada error."
+
+echo "Menjalankan Build untuk menghasilkan file..."
+npm run build
+echo "Build selesai, kode sudah terkompresi atau terbuild."
+
+echo "Commit berhasil setelah format Prettier dan linting."

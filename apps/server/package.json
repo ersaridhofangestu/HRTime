@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "php -S localhost:8000 -t /home/ersa/Coding/Projects/myapps/apps/server",
+    "format": "prettier --write \"./apps/server/**/*.php\"",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

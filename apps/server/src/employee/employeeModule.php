@@ -35,12 +35,10 @@ class EmployeeModule {
     }
 
     public function create($data) {
-        // Validasi apakah semua kolom diisi
         if (empty($data['name']) || empty($data['status']) || empty($data['date']) || empty($data['entry_time']) || empty($data['clock_out'])) {
             throw new Exception("All fields are required.");
         }
 
-        // Eksekusi query menggunakan pg_query_params
         $result = pg_query_params(
             $this->connection->getConnection(), 
             $this->queries->createdGajiKaryawan,

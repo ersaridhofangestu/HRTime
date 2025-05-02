@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -7,16 +7,21 @@ import {
   Input,
   Select,
   TimePicker,
-} from 'antd';
-import { GetDataBody } from '../../interfaceProps';
-import axiosInstance from '../../libs/axios';
+} from "antd";
+import { GetDataBody } from "../../interfaceProps";
+// import axiosInstance from '../../libs/axios';
+import { usePostData } from "./Services/usePostData";
 
-type SizeType = Parameters<typeof Form>[0]['size'];
+type SizeType = Parameters<typeof Form>[0]["size"];
 
 const Created: React.FC = () => {
-  const [data, setData] = useState<GetDataBody>();
-  const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
+  // const [data, setData] = useState<GetDataBody>();
+  const [componentSize, setComponentSize] = useState<SizeType | "default">(
+    "default",
+  );
   const [loadings, setLoadings] = useState<boolean[]>([]);
+
+  const { handlePostData, contextHolder } = usePostData();
 
   const enterLoading = (index: number) => {
     setLoadings((prev) => {
@@ -33,95 +38,84 @@ const Created: React.FC = () => {
     }, 3000);
   };
 
-  const handlePostData = async (values: GetDataBody) => {
-    try {
-      await axiosInstance.post("", values);
-      console.log("Data submitted successfully", values);
-    } catch (error) {
-      console.error("Error submitting data:", error);
-    }
-  };
-    
-  
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
     setComponentSize(size);
   };
 
   return (
-    <div className="flex justify-center items-center flex-col mt-10 md:mt-0 md:h-screen px-4 overflow-hidden">
-      <Card
-        title="Created Data User"
-        className="w-full max-w-[700px] shadow-lg"
-      >
-        <Form
+    <React.Fragment>
+      <div className="flex justify-center items-center flex-col mt-10 md:mt-0 md:h-screen px-4 overflow-hidden">
+        {contextHolder}
+        <Card
+          title="Created Data User"
+          className="w-full max-w-[700px] shadow-lg"
+        >
+          <Form
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
             layout="vertical"
             initialValues={{ size: componentSize }}
             onValuesChange={onFormLayoutChange}
             size={componentSize as SizeType}
-          
-        >
-          <Form.Item label="Nama">
-            <Input
-              className="w-full"
-              onChange={(e) => setData((prev) => ({ ...prev!, name: e.target.value }))}
-            />
-          </Form.Item>
-
-          <Form.Item label="Status">
-            <Select
-              className="w-full"
-              onChange={(value) => setData((prev) => ({ ...prev!, status: value }))}
-            >
-              <Select.Option value="karyawan">Kontrak</Select.Option>
-              <Select.Option value="tetap">Tetap</Select.Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item label="Tanggal">
-            <DatePicker
-              format="YYYY-MM-DD"
-              className="w-full"
-              onChange={(date, dateString) =>
-                setData((prev) => ({ ...prev!, date: Array.isArray(dateString) ? dateString[0] : dateString }))
-              }
-            />
-          </Form.Item>
-
-          <div className="flex flex-col md:flex-row md:gap-4">
-            <Form.Item label="Jam Masuk" className="w-full md:w-1/2">
-              <TimePicker
-                format="HH:mm"
-                className="w-full"
-                onChange={(time, timeString) =>
-                  setData((prev) => ({ ...prev!, entry_time: Array.isArray(timeString) ? timeString[0] : timeString }))
-                }
-              />
-            </Form.Item>
-
-            <Form.Item label="Jam Keluar" className="w-full md:w-1/2">
-              <TimePicker
-                format="HH:mm"
-                className="w-full"
-                onChange={(time, timeString) =>
-                  setData((prev) => ({ ...prev!, clock_out: Array.isArray(timeString) ? timeString[0] : timeString }))
-                }
-              />
-            </Form.Item>
-          </div>
-
-          <Button
-            type="primary"
-            className="w-full"
-            loading={loadings[2]}
-            onClick={() => {enterLoading(2),handlePostData(data!)}}
+            onFinish={handlePostData}
           >
-            Submit
-          </Button>
-        </Form>
-      </Card>
-    </div>
+            <Form.Item
+              label="Nama"
+              name="name"
+              rules={[{ required: true, message: "Nama wajib diisi" }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Status"
+              name="status"
+              rules={[{ required: true, message: "Status wajib diisi" }]}
+            >
+              <Select>
+                <Select.Option value="karyawan">Kontrak</Select.Option>
+                <Select.Option value="tetap">Tetap</Select.Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item
+              label="Tanggal"
+              name="date"
+              rules={[{ required: true, message: "Tanggal wajib diisi" }]}
+            >
+              <DatePicker format="YYYY-MM-DD" className="w-full" />
+            </Form.Item>
+
+            <Form.Item
+              label="Jam Masuk"
+              name="entry_time"
+              rules={[{ required: true, message: "Jam masuk wajib diisi" }]}
+            >
+              <TimePicker format="HH:mm" className="w-full" />
+            </Form.Item>
+
+            <Form.Item
+              label="Jam Keluar"
+              name="clock_out"
+              rules={[{ required: true, message: "Jam keluar wajib diisi" }]}
+            >
+              <TimePicker format="HH:mm" className="w-full" />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="w-full"
+                loading={loadings[2]}
+                onClick={() => enterLoading(2)}
+              >
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </div>
+    </React.Fragment>
   );
 };
 

@@ -8,7 +8,7 @@ const Created = lazy(() => import("./pages/Created"));
 export const router = createBrowserRouter([
   {
     path: "/auth/login-admin",
-    element: (<Login />),  
+    element: <Login />,
   },
   {
     path: "/",
@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (<Dashboard />),
+    element: <Dashboard />,
   },
   {
     path: "/dashboard/edit-data",
@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard/created-data",
-    element: <Created/>,
+    element: <Created />,
   },
   {
     path: "*",

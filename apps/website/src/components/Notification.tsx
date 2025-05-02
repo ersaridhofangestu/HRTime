@@ -1,19 +1,23 @@
-import React from 'react';
-import { Button, notification, Space } from 'antd';
+import React from "react";
+import { Button, notification, Space } from "antd";
 
 interface Notification {
-    title: string;
-    description: string;
-    text_button: string;
+  title: string;
+  description: string;
+  text_button: string;
 }
 
 const close = () => {
   console.log(
-    'Notification was closed. Either the close button was clicked or duration time elapsed.',
+    "Notification was closed. Either the close button was clicked or duration time elapsed.",
   );
 };
 
-const Notification: React.FC<Notification> = ({ title, description, text_button}) => {
+const Notification: React.FC<Notification> = ({
+  title,
+  description,
+  text_button,
+}) => {
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
@@ -36,14 +40,14 @@ const Notification: React.FC<Notification> = ({ title, description, text_button}
       onClose: close,
     });
   };
-    return (
-        <div>
-        {contextHolder}
-            <Button type="primary" onClick={openNotification}>
-                {text_button}
-            </Button>
-        </div>
-    );
+  return (
+    <div>
+      {contextHolder}
+      <Button type="primary" onClick={openNotification}>
+        {text_button}
+      </Button>
+    </div>
+  );
 };
 
 export default Notification;

@@ -1,4 +1,3 @@
-
 ## 📘 Employee Salary API Documentation
 
 RESTful API untuk mengelola data gaji karyawan menggunakan PHP dan PostgreSQL.
@@ -6,6 +5,7 @@ RESTful API untuk mengelola data gaji karyawan menggunakan PHP dan PostgreSQL.
 ---
 
 ### 🌐 Base URL
+
 ```
 http://localhost:8000
 ```
@@ -21,41 +21,46 @@ http://localhost:8000
 **Deskripsi:** Menambahkan data gaji karyawan baru.
 
 **Headers:**
+
 ```http
 Content-Type: application/json
 ```
 
 **Body:**
+
 ```json
 {
-  "name": "Budi Hartono",
-  "status": "Kontrak",
-  "date": "2025-05-01",
-  "entry_time": "08:00",
-  "clock_out": "17:00"
+    "name": "Budi Hartono",
+    "status": "Kontrak",
+    "date": "2025-05-01",
+    "entry_time": "08:00",
+    "clock_out": "17:00"
 }
 ```
 
 **Response Success:**
+
 ```json
 {
-  "message": "Employee created successfully"
+    "message": "Employee created successfully"
 }
 ```
 
 **Response Error (Field Kosong):**
+
 ```json
 {
-  "error": "Field tidak lengkap",
-  "status_code": 400
+    "error": "Field tidak lengkap",
+    "status_code": 400
 }
 ```
 
 **Response Error (Kesalahan Server):**
+
 ```json
 {
-  "error": "Internal Server Error",
-  "status_code": 500
+    "error": "Internal Server Error",
+    "status_code": 500
 }
 ```
 
@@ -66,6 +71,7 @@ Content-Type: application/json
 **Deskripsi:** Mengambil semua data gaji karyawan.
 
 **Response:**
+
 ```json
 [
   {
@@ -87,19 +93,21 @@ Content-Type: application/json
 **Deskripsi:** Mengambil detail satu karyawan.
 
 **Contoh URL:**
+
 ```
 http://localhost/myapps/api.php?id=1
 ```
 
 **Response:**
+
 ```json
 {
-  "id": 1,
-  "name": "Budi Hartono",
-  "status": "Kontrak",
-  "date": "2025-05-01",
-  "entry_time": "08:00:00",
-  "clock_out": "17:00:00"
+    "id": 1,
+    "name": "Budi Hartono",
+    "status": "Kontrak",
+    "date": "2025-05-01",
+    "entry_time": "08:00:00",
+    "clock_out": "17:00:00"
 }
 ```
 
@@ -110,25 +118,28 @@ http://localhost/myapps/api.php?id=1
 **Deskripsi:** Memperbarui data gaji karyawan berdasarkan ID.
 
 **Headers:**
+
 ```http
 Content-Type: application/json
 ```
 
 **Body:**
+
 ```json
 {
-  "name": "Budi Santoso",
-  "status": "Tetap",
-  "date": "2025-05-01",
-  "entry_time": "09:00",
-  "clock_out": "18:00"
+    "name": "Budi Santoso",
+    "status": "Tetap",
+    "date": "2025-05-01",
+    "entry_time": "09:00",
+    "clock_out": "18:00"
 }
 ```
 
 **Response:**
+
 ```json
 {
-  "message": "Employee updated successfully"
+    "message": "Employee updated successfully"
 }
 ```
 
@@ -139,14 +150,16 @@ Content-Type: application/json
 **Deskripsi:** Menghapus data karyawan berdasarkan ID.
 
 **Contoh URL:**
+
 ```
 http://localhost/myapps/api.php?id=1
 ```
 
 **Response:**
+
 ```json
 {
-  "message": "Employee deleted successfully"
+    "message": "Employee deleted successfully"
 }
 ```
 

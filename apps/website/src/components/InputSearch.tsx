@@ -4,9 +4,15 @@ import type { AutoCompleteProps } from "antd";
 
 type InputSearchProps = {
   array: string[];
+  handleOnChange: Function;
+  output: Function;
 };
 
-const InputSearch: React.FC<InputSearchProps> = ({ array }) => {
+const InputSearch: React.FC<InputSearchProps> = ({
+  array,
+  handleOnChange,
+  output,
+}) => {
   const [options, setOptions] = useState<AutoCompleteProps["options"]>([]);
 
   const handleSearch = (value: string) => {
@@ -23,7 +29,7 @@ const InputSearch: React.FC<InputSearchProps> = ({ array }) => {
   };
 
   const onSelect = (value: string) => {
-    console.log("onSelect", value);
+    output(value);
   };
 
   return (
@@ -32,9 +38,13 @@ const InputSearch: React.FC<InputSearchProps> = ({ array }) => {
       options={options}
       onSelect={onSelect}
       onSearch={handleSearch}
-      size="large"
     >
-      <Input.Search size="large" placeholder="Search name..." enterButton />
+      <Input.Search
+        size="large"
+        onChange={(e) => handleOnChange(e.target.value)}
+        placeholder="Search name..."
+        enterButton
+      />
     </AutoComplete>
   );
 };

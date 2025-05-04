@@ -1,14 +1,13 @@
 import usePopCinfirm from "./usePopconfirm";
-import { useMessage } from "../../../service/useMessage";
-import axiosInstance from "../../../libs/axios";
+import { useMessage } from "./useMessage";
+import axiosInstance from "../libs/axiosInstance";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const useDeletedData = () => {
-const navigate = useNavigate();
-const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { createPopconfirm } = usePopCinfirm();
   const { contextHolder, success, error } = useMessage();
-
 
   const handleDeleted = async (id: string | undefined) => {
     if (!id || id.trim() === "") {

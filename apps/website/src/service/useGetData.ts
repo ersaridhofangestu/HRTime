@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { GetDataBody } from "../../../interfaceProps";
-import axiosInstance from "../../../libs/axios";
+import { GetDataBody } from "../interfaceProps";
+import axiosInstance from "../libs/axiosInstance";
 
 const useGetData = () => {
   const [datas, setDatas] = useState<GetDataBody[]>([]);

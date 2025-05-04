@@ -5,7 +5,7 @@ import { GetDataBody } from "../../../interfaceProps";
 import { Link } from "react-router-dom";
 import ButtonActive from "../../../components/ButtonActive";
 import { EditOutlined } from "@ant-design/icons";
-import useDeletedData from "../services/useDeletedData";
+import useDeletedData from "../../../service/useDeletedData";
 
 const TableDatas: React.FC<{ array: GetDataBody[] }> = ({ array }) => {
   const { contextHolder, renderDeletePopconfirm } = useDeletedData();
@@ -103,7 +103,6 @@ const TableDatas: React.FC<{ array: GetDataBody[] }> = ({ array }) => {
             <ButtonActive Icon={<EditOutlined />} />
           </Link>
           {renderDeletePopconfirm(String(record.id))}
-          {/* <renderDeletePopconfirm><DeleteOutlined/></renderDeletePopconfirm> */}
         </div>
       ),
     },
@@ -118,11 +117,10 @@ const TableDatas: React.FC<{ array: GetDataBody[] }> = ({ array }) => {
     console.log("params", pagination, filters, sorter, extra);
   };
 
-  const close = () => {
-    console.log(
-      "Notification was closed. Either the close button was clicked or duration time elapsed.",
-    );
-  };
+  const dataSourceWithKey = array.map((data, index) => ({
+    ...data,
+    key: data.id || index,
+  }));
 
   return (
     <>
@@ -130,7 +128,7 @@ const TableDatas: React.FC<{ array: GetDataBody[] }> = ({ array }) => {
       <Table<GetDataBody>
         className="md:p-5"
         columns={columns}
-        dataSource={array}
+        dataSource={dataSourceWithKey}
         onChange={onChange}
         scroll={{ x: "max-content" }}
       />

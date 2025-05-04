@@ -2,7 +2,6 @@ import { message } from "antd";
 
 const useMessage = () => {
   const [messageApi, contextHolder] = message.useMessage();
-  console.log(contextHolder);
   const success = (content: string) => {
     messageApi.open({
       type: "success",

@@ -8,14 +8,11 @@ import {
   Select,
   TimePicker,
 } from "antd";
-import { GetDataBody } from "../../interfaceProps";
-// import axiosInstance from '../../libs/axios';
-import { usePostData } from "./Services/usePostData";
+import { usePostData } from "../../service/usePostData";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 
 const Created: React.FC = () => {
-  // const [data, setData] = useState<GetDataBody>();
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default",
   );

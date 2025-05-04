@@ -4,7 +4,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 const Login = lazy(() => import("./auth/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Created = lazy(() => import("./pages/Created"));
-
+const Updated = lazy(() => import("./pages/Updated"));
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard/edit-data",
-    element: <div>samkamxsak</div>,
+    element: <Updated />,
   },
   {
     path: "/dashboard/created-data",

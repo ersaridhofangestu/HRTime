@@ -1,5 +1,5 @@
 import { GetDataBody } from "../../../interfaceProps";
-import axiosInstance from "../../../libs/axios";
+import axiosInstance from "../../../libs/axiosInstance";
 import { useMessage } from "../../../service/useMessage";
 import { useNavigate } from "react-router-dom";
 

@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ButtonCreated, InputSearch, TableDatas } from "../../components";
 import LogoWallet from "/src/assets/wallet.png";
 import useGetData from "./services/useGetData";
 import useDeletedData from "./services/useDeletedData";
+import DropdownOpstion from "./components/DropdownOpstion";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const user_email = localStorage.getItem("user_email");
+  useEffect(() => {
+      if (!user_email) {
+        navigate('/')
+      }
+    }, [user_email])
   const { contextHolder } = useDeletedData();
   const { datas } = useGetData();
 
@@ -31,9 +39,7 @@ const Dashboard = () => {
           />
           <h1 className="md:text-3xl md:font-bold">HRTime</h1>
         </div>
-        {user_email && (
-          <p className="text-sm md:text-xl pt-4">{JSON.parse(user_email)}</p>
-        )}
+        <DropdownOpstion/>
       </div>
       <div className="flex items-center justify-around mt-10 gap-4 mx-[1rem] md:mr-[2rem] xl:mr-[3rem]">
         <InputSearch array={filterData()} />

@@ -5,6 +5,7 @@ const Login = lazy(() => import("./auth/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Created = lazy(() => import("./pages/Created"));
 
+
 export const router = createBrowserRouter([
   {
     path: "/auth/login-admin",

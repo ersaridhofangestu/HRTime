@@ -1,43 +1,99 @@
-import React from "react";
-import { handleLogin } from "./service";
+import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+} from "antd";
 
-const Login = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+import securityGuard from "./assets/security-guard.gif"
 
-  localStorage.getItem("user_email") && (window.location.href = "/dashboard");
+import { handleLogin } from "./service"
+import { useMessage } from "../service/useMessage";
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    handleLogin({ email, password });
+type SizeType = Parameters<typeof Form>[0]["size"];
+
+const Login: React.FC = () => {
+  
+  const [componentSize, setComponentSize] = useState<SizeType | "default">(
+    "default",
+  );
+  const [loadings, setLoadings] = useState<boolean[]>([]);
+  const { success, error, contextHolder } = useMessage();
+
+
+  const enterLoading = (index: number) => {
+    setLoadings((prev) => {
+      const newLoadings = [...prev];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prev) => {
+        const newLoadings = [...prev];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    }, 3000);
+  };
+
+  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
+    setComponentSize(size);
   };
 
   return (
     <React.Fragment>
-      <form method="POST" onSubmit={(event) => handleFormSubmit(event)}>
-        <h1>Login</h1>
+      {contextHolder}
+      <div className="flex justify-center items-center flex-col md:flex-row lg:gap-5 h-screen px-4 overflow-hidden">
         <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <p className="font-bold text-xl text-center">Halo Admin, selamat datang kembali!</p>
+          <img src={securityGuard} className="w-[15rem] md:w-[10rem] lg:w-[30rem] mx-auto" />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+        <Card
+          title="Login"
+          className="w-full max-w-[700px] md:shadow-lg"
+        >
+          <small className="text-xs">Pantau data, kelola konten, dan kontrol semua aktivitas dari satu tempat.</small>
+          <Form
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+            layout="vertical"
+            initialValues={{ size: componentSize }}
+            onValuesChange={onFormLayoutChange}
+            size={componentSize as SizeType}
+            onFinish={(values) => handleLogin(values, success, error)}
+          >
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Email wajib diisi" },{ type: 'email', message: "Format email tidak valid" }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Password"
+              name="password"
+              
+              rules={[{ required: true, message: "Password wajib diisi" },{ message: "Password tidak valid" }]}
+            >
+                 <Input.Password />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="w-full"
+                loading={loadings[2]}
+                onClick={() => enterLoading(2)}
+              >
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </div>
     </React.Fragment>
   );
 };

@@ -92,12 +92,6 @@ Content-Type: application/json
 
 **Deskripsi:** Mengambil detail satu karyawan.
 
-**Contoh URL:**
-
-```
-http://localhost/myapps/api.php?id=1
-```
-
 **Response:**
 
 ```json
@@ -148,12 +142,6 @@ Content-Type: application/json
 ### ❌ [DELETE] `/?id={id}` - Hapus Data Karyawan
 
 **Deskripsi:** Menghapus data karyawan berdasarkan ID.
-
-**Contoh URL:**
-
-```
-http://localhost/myapps/api.php?id=1
-```
 
 **Response:**
 

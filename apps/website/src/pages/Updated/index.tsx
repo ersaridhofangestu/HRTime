@@ -1,6 +1,6 @@
 // Updated.tsx
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -16,6 +16,7 @@ import useUpdateDataById from "../../service/useUpdateDataById";
 
 const Updated: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate()
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
   const { data: dataNew, contextHolder:get } = useGetDataById(id);
@@ -35,10 +36,11 @@ const Updated: React.FC = () => {
   }, [dataNew]);
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen">
         {get}
         {update}
-      <Card title="Update Data" className="w-full max-w-[600px]">
+        <Button className="float-right max-w-[700px] w-full" onClick={() => navigate("/dashboard")} type="dashed">Kembali</Button>
+      <Card title="Update Data" className="w-full max-w-[700px]">
         <Form
           form={form}
           layout="vertical"

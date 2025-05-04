@@ -1,6 +1,6 @@
-import { GetDataBody } from "../../../interfaceProps";
-import axiosInstance from "../../../libs/axiosInstance";
-import { useMessage } from "../../../service/useMessage";
+import { GetDataBody } from "../interfaceProps";
+import axiosInstance from "../libs/axiosInstance";
+import { useMessage } from "../service/useMessage";
 import { useNavigate } from "react-router-dom";
 
 export const usePostData = () => {
@@ -17,13 +17,13 @@ export const usePostData = () => {
 
     try {
       await axiosInstance.post("", formattedValues);
-      success("suscess - data berhasil dikirim");
-      setTimeout(() => {
-        navigate(-1);
-      }, 3000);
+      success("Data berhasil dikirim");
     } catch (e) {
-      error("error - server mati");
+      error("server mati");
     }
+    setTimeout(() => {
+      navigate(-1);
+    }, 3000);
   };
 
   return { handlePostData, contextHolder };

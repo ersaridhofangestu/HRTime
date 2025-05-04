@@ -1,5 +1,5 @@
 {
-  "name": "myapps",
+  "name": "hrtime",
   "private": true,
   "scripts": {
     "build": "turbo run build",

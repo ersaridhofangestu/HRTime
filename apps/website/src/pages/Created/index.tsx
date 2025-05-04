@@ -9,7 +9,7 @@ import {
   TimePicker,
 } from "antd";
 import { usePostData } from "../../service/usePostData";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 
@@ -18,7 +18,7 @@ const Created: React.FC = () => {
     "default",
   );
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [loadings, setLoadings] = useState<boolean[]>([]);
 
   const { handlePostData, contextHolder } = usePostData();
@@ -46,7 +46,13 @@ const Created: React.FC = () => {
     <React.Fragment>
       <div className="flex justify-center items-center flex-col mt-10 md:mt-0 md:h-screen px-4 overflow-hidden">
         {contextHolder}
-        <Button className="float-right max-w-[700px] w-full" onClick={() => navigate("/dashboard")} type="dashed">Kembali</Button>
+        <Button
+          className="float-right max-w-[700px] w-full"
+          onClick={() => navigate("/dashboard")}
+          type="dashed"
+        >
+          Kembali
+        </Button>
         <Card
           title="Created Data User"
           className="w-full max-w-[700px] shadow-lg"

@@ -16,12 +16,12 @@ import useUpdateDataById from "../../service/useUpdateDataById";
 
 const Updated: React.FC = () => {
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
-  const { data: dataNew, contextHolder:get } = useGetDataById(id);
+  const { data: dataNew, contextHolder: get } = useGetDataById(id);
   const [form] = Form.useForm();
-  const {contextHolder:update, fetchData} = useUpdateDataById()
+  const { contextHolder: update, fetchData } = useUpdateDataById();
 
   useEffect(() => {
     if (dataNew) {
@@ -37,9 +37,15 @@ const Updated: React.FC = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
-        {get}
-        {update}
-        <Button className="float-right max-w-[700px] w-full" onClick={() => navigate("/dashboard")} type="dashed">Kembali</Button>
+      {get}
+      {update}
+      <Button
+        className="float-right max-w-[700px] w-full"
+        onClick={() => navigate("/dashboard")}
+        type="dashed"
+      >
+        Kembali
+      </Button>
       <Card title="Update Data" className="w-full max-w-[700px]">
         <Form
           form={form}

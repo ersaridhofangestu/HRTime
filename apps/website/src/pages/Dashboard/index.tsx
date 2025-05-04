@@ -8,14 +8,24 @@ import { useNavigate } from "react-router-dom";
 import { GetDataBody } from "../../interfaceProps";
 
 const Dashboard = () => {
-  const [searchName, setSearchName] = useState<string>(""); 
-  const [dataFilter, setDataFilter] = useState<GetDataBody[]>([]); 
+  const [searchName, setSearchName] = useState<string>("");
+  const [dataFilter, setDataFilter] = useState<GetDataBody[]>([]);
   const [outputSearchSelect, setOutputSelect] = useState<string>("");
 
   const navigate = useNavigate();
   const user_email = localStorage.getItem("user_email");
   const { contextHolder } = useDeletedData();
   const { datas } = useGetData();
+
+  let allSalery = 0;
+  let formatRupiah;
+  datas.map((data) => (allSalery += data.salary));
+  const formatted = allSalery.toString().replace(/^0+/, "");
+  if (formatted.length > 3) {
+    const parts = formatted.split(".");
+    const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    formatRupiah = integerPart;
+  }
 
   useEffect(() => {
     if (!user_email) {
@@ -57,7 +67,6 @@ const Dashboard = () => {
       </div>
 
       <div className="flex items-center justify-around mt-10 gap-4 mx-[1rem] md:mr-[2rem] xl:mr-[3rem]">
-        {/* Kirim outputSelect ke InputSearch */}
         <InputSearch
           array={datas?.map((item) => item.name) || []}
           handleOnChange={setSearchName}
@@ -66,7 +75,8 @@ const Dashboard = () => {
       </div>
 
       <div className="m-[1rem]">
-        <div className="flex justify-end items-center md:mr-[1.3rem] xl:mr-[3rem]">
+        <div className="flex justify-between items-center md:mr-[1.3rem] xl:mr-[3rem]">
+          Total Gajih Karyawan Rp.{formatRupiah}
           <ButtonCreated />
         </div>
         <TableDatas array={dataFilter} />

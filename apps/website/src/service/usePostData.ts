@@ -8,6 +8,8 @@ export const usePostData = () => {
   const navigate = useNavigate();
 
   const handlePostData = async (values: GetDataBody) => {
+    console.log(values.entry_time)
+    
     const formattedValues = {
       ...values,
       date: values.date?.format("YYYY-MM-DD"),

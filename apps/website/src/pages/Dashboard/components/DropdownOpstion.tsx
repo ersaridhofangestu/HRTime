@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { LogoutOutlined, SettingOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Dropdown, Space } from "antd";

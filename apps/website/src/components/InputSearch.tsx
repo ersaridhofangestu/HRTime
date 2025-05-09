@@ -16,8 +16,12 @@ const InputSearch: React.FC<InputSearchProps> = ({
   const [options, setOptions] = useState<AutoCompleteProps["options"]>([]);
 
   const handleSearch = (value: string) => {
-    if (!value) {
-      setOptions([]);
+    const trimmedValue = value.trim();
+
+    if (!trimmedValue) {
+      const allOptions = array.map((item) => ({ value: item }));
+      setOptions(allOptions);
+      output("");
       return;
     }
 
@@ -26,6 +30,7 @@ const InputSearch: React.FC<InputSearchProps> = ({
       .map((item) => ({ value: item }));
 
     setOptions(filtered);
+    output(trimmedValue); 
   };
 
   const onSelect = (value: string) => {

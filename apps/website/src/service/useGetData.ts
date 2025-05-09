@@ -18,11 +18,14 @@ const useGetData = () => {
 
         if (data.entry_time.split(":")[0] >= "07") {
           if (
-            data.entry_time.split(":")[0] > "00" &&
-            data.entry_time.split(":")[0] <= "10"
+            Number(data.entry_time.split(":")[1]) == Number("00")
           ) {
+            data.fine = 0;
+          }
+          else if (Number(data.entry_time.split(":")[1]) <= Number("10")){
             data.fine += 20000;
-          } else {
+          }
+           else {
             data.fine += 40000;
           }
         } else {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "antd";
-import type { TableColumnsType, TableProps } from "antd";
+import type { TableColumnsType } from "antd";
 import { GetDataBody } from "../../../interfaceProps";
 import { Link } from "react-router-dom";
 import ButtonActive from "../../../components/ButtonActive";
@@ -24,14 +24,14 @@ const TableDatas: React.FC<{ array: GetDataBody[] }> = ({ array }) => {
       filters: [
         {
           text: "Kontrak",
-          value: "kontrak",
+          value: "Kontrak",
         },
         {
           text: "Tetap",
           value: "Tetap",
         },
       ],
-      sorter: (a, b) => a.status.localeCompare(b.status),
+      onFilter: (value, record) => record.status === value,
     },
     {
       title: "Tanggal",
@@ -58,12 +58,33 @@ const TableDatas: React.FC<{ array: GetDataBody[] }> = ({ array }) => {
       align: "center",
       dataIndex: "working_hours",
       width: "15%",
+      filters: [
+        {
+          text: "> 8 jam",
+          value: "more",
+        },
+        {
+          text: "≤ 8 jam",
+          value: "less",
+        },
+      ],
+      onFilter: (value, record) => {
+        if (record.working_hours){
+          if (value === "more") {
+            return record.working_hours > 8;
+          }
+          if (value === "less") {
+            return record.working_hours <= 8;
+          }
+        }
+        return false;
+      },
       render: (value: number) => {
         const jam = Math.ceil(value);
-        const color = jam >= 9 ? "green" : "red";
+        const color = jam <= 8 ? "red" : "green";
         return <span style={{ color }}>{jam} jam</span>;
       },
-    },
+    },    
     {
       title: "Denda",
       dataIndex: "fine",
@@ -108,14 +129,6 @@ const TableDatas: React.FC<{ array: GetDataBody[] }> = ({ array }) => {
     },
   ];
 
-  const onChange: TableProps<GetDataBody>["onChange"] = (
-    pagination,
-    filters,
-    sorter,
-    extra,
-  ) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
 
   const dataSourceWithKey = array.map((data, index) => ({
     ...data,
@@ -129,7 +142,6 @@ const TableDatas: React.FC<{ array: GetDataBody[] }> = ({ array }) => {
         className="md:p-5"
         columns={columns}
         dataSource={dataSourceWithKey}
-        onChange={onChange}
         scroll={{ x: "max-content" }}
       />
     </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Form, Input } from "antd";
 
 import securityGuard from "./assets/security-guard.gif";
@@ -9,9 +9,7 @@ import { useMessage } from "../service/useMessage";
 type SizeType = Parameters<typeof Form>[0]["size"];
 
 const Login: React.FC = () => {
-  const [componentSize, setComponentSize] = useState<SizeType | "default">(
-    "default",
-  );
+  const [componentSize, setComponentSize] = useState<SizeType | "default">("default");
   const [loadings, setLoadings] = useState<boolean[]>([]);
   const { success, error, contextHolder } = useMessage();
 
@@ -34,6 +32,10 @@ const Login: React.FC = () => {
     setComponentSize(size);
   };
 
+  useEffect(() => {
+    localStorage.removeItem
+  }, []);
+
   return (
     <React.Fragment>
       {contextHolder}
@@ -45,6 +47,7 @@ const Login: React.FC = () => {
           <img
             src={securityGuard}
             className="w-[15rem] md:w-[10rem] lg:w-[30rem] mx-auto"
+            alt="police"
           />
         </div>
         <Card title="Login" className="w-full max-w-[700px] md:shadow-lg">

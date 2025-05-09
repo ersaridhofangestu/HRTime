@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -18,7 +18,6 @@ const Created: React.FC = () => {
     "default",
   );
 
-  const navigate = useNavigate();
   const [loadings, setLoadings] = useState<boolean[]>([]);
 
   const { handlePostData, contextHolder } = usePostData();
@@ -41,6 +40,14 @@ const Created: React.FC = () => {
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
     setComponentSize(size);
   };
+
+  const navigate = useNavigate();
+  const user_email = localStorage.getItem("user_email");
+  useEffect(() => {
+      if (!user_email) {
+        navigate("/");
+      }
+    }, [user_email, navigate]);
 
   return (
     <React.Fragment>

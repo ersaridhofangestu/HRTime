@@ -12,8 +12,7 @@ const Dashboard = () => {
   const [dataFilter, setDataFilter] = useState<GetDataBody[]>([]);
   const [outputSearchSelect, setOutputSelect] = useState<string>("");
 
-  const navigate = useNavigate();
-  const user_email = localStorage.getItem("user_email");
+  
   const { contextHolder } = useDeletedData();
   const { datas } = useGetData();
 
@@ -27,6 +26,8 @@ const Dashboard = () => {
     formatRupiah = integerPart;
   }
 
+  const navigate = useNavigate();
+  const user_email = localStorage.getItem("user_email");
   useEffect(() => {
     if (!user_email) {
       navigate("/");

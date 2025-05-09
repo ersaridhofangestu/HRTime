@@ -22,8 +22,13 @@ const Updated: React.FC = () => {
   const { data: dataNew, contextHolder: get } = useGetDataById(id);
   const [form] = Form.useForm();
   const { contextHolder: update, fetchData } = useUpdateDataById();
+  const user_email = localStorage.getItem("user_email");
 
   useEffect(() => {
+    if (!user_email) {
+      navigate("/");
+    }
+
     if (dataNew) {
       form.setFieldsValue({
         name: dataNew.name,
@@ -33,7 +38,7 @@ const Updated: React.FC = () => {
         clock_out: dayjs(dataNew.clock_out, "HH:mm"),
       });
     }
-  }, [dataNew]);
+  }, [dataNew, user_email, navigate]);
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">

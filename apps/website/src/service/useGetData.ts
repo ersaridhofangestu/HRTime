@@ -7,7 +7,7 @@ const useGetData = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get("");
+      const response = await axiosInstance.get("api/employee");
       const rawDatas = response.data.data;
 
       const updatedDatas = rawDatas.map((data: GetDataBody) => {

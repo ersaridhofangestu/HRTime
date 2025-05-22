@@ -16,7 +16,7 @@ const useDeletedData = () => {
     }
 
     try {
-      await axiosInstance.delete(`?id=${id}`);
+      await axiosInstance.delete(`api/employee?id=${id}`);
       success("Data berhasil dihapus.");
       navigate(location.pathname, { replace: true });
     } catch (e) {

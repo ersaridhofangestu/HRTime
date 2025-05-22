@@ -11,7 +11,7 @@ const useUpdateDataById = () => {
     if (!id || !data) return;
 
     try {
-      await axiosInstance.put(`?id=${id}`, data);
+      await axiosInstance.put(`api/employee?id=${id}`, data);
       success("Data berhasil diubah.");
     } catch (_) {
       error("Data tidak ditemukan.");

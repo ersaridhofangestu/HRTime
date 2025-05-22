@@ -17,7 +17,7 @@ export const usePostData = () => {
     };
 
     try {
-      await axiosInstance.post("", formattedValues);
+      await axiosInstance.post("api/employee", formattedValues);
       success("Data berhasil dikirim");
     } catch (e) {
       error("server mati");

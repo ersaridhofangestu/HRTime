@@ -16,7 +16,7 @@ const useGetDataById = (id: string | null) => {
 
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get(`?id=${id}`);
+        const response = await axiosInstance.get(`api/employee?id=${id}`);
         if (isMounted) {
           setData(response.data.data);
           success("Data berhasil ditemukan.");

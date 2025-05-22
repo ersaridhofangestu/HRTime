@@ -141,7 +141,7 @@ function login(email: string, password: string) {
 1. **Clone repositori**
 
 ```bash
-git clone https://github.com/your-username/myapps.git
+git clone https://github.com/ersaridhofangestu/HRTime
 cd myapps
 ```
 

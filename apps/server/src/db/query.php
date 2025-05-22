@@ -5,14 +5,20 @@ class Queries {
                                         status, 
                                         date, 
                                         entry_time, 
-                                        clock_out
+                                        clock_out,
+                                        working_hours,
+                                        fine,         
+                                        salary 
                                     )   
                                     VALUES (
                                        $1, 
                                        $2, 
                                        $3, 
                                        $4, 
-                                       $5
+                                       $5,
+                                       $6,
+                                       $7,
+                                       $8
                                        )";
     
     public $updatedKaryawan = "UPDATE employee_salary 
@@ -22,6 +28,7 @@ class Queries {
                                         date = $4, 
                                         entry_time = $5, 
                                         clock_out = $6
+                                           
                                     WHERE 
                                         id =  $1";  
 

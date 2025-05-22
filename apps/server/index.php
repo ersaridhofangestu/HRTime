@@ -10,7 +10,6 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 require(__DIR__ . '/src/employee/employeeController.php');
 
 $request_method = $_SERVER['REQUEST_METHOD'];
-$controller = new EmployeeController();
 
 header('Content-Type: application/json');
 
@@ -18,9 +17,9 @@ try {
     switch ($request_method) {
         case 'GET':
             if (isset($_GET['id'])) {
-                $controller->getEmployeeById($_GET['id']);
+                EmployeeController::getEmployeeById($_GET['id']);
             } else {
-                $controller->getEmployees();
+                EmployeeController::getEmployees();
             }
             break;
 
@@ -29,7 +28,7 @@ try {
             if (empty($data)) {
                 throw new Exception("Invalid data received for POST request.");
             }
-            $controller->createEmployee($data);
+            EmployeeController::createEmployee($data);
             break;
 
         case 'PUT':
@@ -41,7 +40,7 @@ try {
             if (empty($data)) {
                 throw new Exception("Invalid data received for PUT request.");
             }
-            $controller->updateEmployee($id, $data);
+            EmployeeController::updateEmployee($id, $data);
             break;
 
         case 'DELETE':
@@ -49,7 +48,7 @@ try {
                 throw new Exception("Employee ID is required for DELETE request.");
             }
             $id = $_GET['id'];
-            $controller->deleteEmployee($id);
+            EmployeeController::deleteEmployee($id);
             break;
 
         default:

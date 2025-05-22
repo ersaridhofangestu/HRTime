@@ -9,7 +9,7 @@ class employeeView {
             'data' => $data,
             'timestamp' => date('c') 
         ];
-        self::respond($response);
+        self::response($response);
     }
 
     public static function error($type, $message, $code = 500) {
@@ -22,10 +22,10 @@ class employeeView {
             ],
             'timestamp' => date('c')
         ];
-        self::respond($response);
+        self::response($response);
     }
 
-    private static function respond($response) {
+    private static function response($response) {
         header('Content-Type: application/json');
         echo json_encode($response, JSON_PRETTY_PRINT);
         exit;
